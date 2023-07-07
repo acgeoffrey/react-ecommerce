@@ -1,13 +1,22 @@
 import { combineReducers } from "redux";
+import { ADD_PRODUCTS } from "../actions";
 
 const initialState = {
   list: [],
   cart: [],
-  showCart: false,
 };
 
 export function products(state = initialState, action) {
-  return initialState;
+  switch (action.type) {
+    case ADD_PRODUCTS:
+      return {
+        ...state,
+        list: action.products,
+      };
+
+    default:
+      return state;
+  }
 }
 
 export default products;

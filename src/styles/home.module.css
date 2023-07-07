@@ -1,0 +1,100 @@
+.container {
+  margin-top: 3rem;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+}
+
+.productDiv {
+  width: 30%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  border: 1px solid rgba(128, 128, 128, 0.307);
+  border-radius: 1.5rem;
+  position: relative;
+}
+
+.productImage img {
+  height: 10rem;
+  width: 7rem;
+}
+
+.titleRating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.rating {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+}
+
+.rating p {
+  font-size: 0.8rem;
+}
+
+.description {
+  height: 15%;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.price p {
+  color: grey;
+}
+
+.priceButtons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cartBtn {
+  width: 9rem;
+  height: 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: white;
+  border: 1px solid rgba(128, 128, 128, 0.307);
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  padding: 0 1rem;
+}
+
+.bottomButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.bottomButtons button {
+  background-color: white;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.bottomButtons button:first-child {
+  color: #2b3467;
+}
+
+.bottomButtons button:nth-child(2n) {
+  color: #eb455f;
+}

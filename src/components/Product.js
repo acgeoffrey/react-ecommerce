@@ -1,46 +1,113 @@
+import { useEffect, useState } from "react";
 import styles from "../styles/home.module.css";
 import { Rating } from "@mui/material";
 
 const Product = (props) => {
+  const [edit, setEdit] = useState(false);
+  const [data, setData] = useState({
+    title: props.product.title,
+    description: props.product.description,
+    rating: props.product.rating,
+    price: props.product.price,
+  });
+
+  useEffect(() => {
+    if (props.editing.isEdit && props.product === props.editing.product) {
+      setEdit(true);
+    }
+  }, [props.editing.isEdit, props.product, props.editing.product]);
+
   return (
     <div className={styles.productDiv}>
       <div className={styles.productImage}>
         <img src={props.product.thumbnail} alt="" />
       </div>
       <div className={styles.titleRating}>
-        <h3>{props.product.title}</h3>
+        {edit ? (
+          <input
+            value={data.title}
+            onChange={(e) => setData({ ...data, title: e.target.value })}
+          />
+        ) : (
+          <h3>{props.product.title}</h3>
+        )}
+
         <div className={styles.rating}>
           <p>
             <Rating
               name="half-rating-read"
               defaultValue={2.5}
-              value={props.product.rating.toFixed(1)}
+              value={props.product.rating}
               precision={0.1}
               readOnly
             />
           </p>
-          <p>({props.product.rating.toFixed(1)})</p>
+          {edit ? (
+            <input
+              value={data.rating}
+              onChange={(e) => setData({ ...data, rating: e.target.value })}
+            />
+          ) : (
+            <p>({props.product.rating})</p>
+          )}
         </div>
       </div>
       <div className={styles.description}>
-        <p>{props.product.description}</p>
+        {edit ? (
+          <textarea
+            value={data.description}
+            className={styles.inputDescription}
+            onChange={(e) => setData({ ...data, description: e.target.value })}
+          ></textarea>
+        ) : (
+          <p>{props.product.description}</p>
+        )}
       </div>
       <div className={styles.priceButtons}>
         <div className={styles.price}>
           <p>Price</p>
-          <h3>
-            ₹ <span>{props.product.price * 83}</span>
-          </h3>
+          {edit ? (
+            <input
+              value={data.price}
+              onChange={(e) => setData({ ...data, price: e.target.value })}
+            />
+          ) : (
+            <h3>
+              ₹ <span>{props.product.price}</span>
+            </h3>
+          )}
         </div>
         <div className={styles.buttons}>
           <button className={styles.cartBtn}>Add to cart</button>
         </div>
       </div>
       <div className={styles.bottomButtons}>
-        <button>
-          <i className="fa-solid fa-pen"></i>
-        </button>
-        <button>
+        {edit ? (
+          <button>
+            <i
+              className="fa-solid fa-floppy-disk"
+              style={{ color: "#609966" }}
+              onClick={() => {
+                setEdit(false);
+                const product = props.editing.product;
+                product.title = data.title;
+                product.price = data.price;
+                product.description = data.description;
+                product.rating = data.rating;
+                props.editFunction(product, false);
+              }}
+            ></i>
+          </button>
+        ) : (
+          <button>
+            <i
+              className="fa-solid fa-pen"
+              onClick={() => props.editFunction(props.product, true)}
+            ></i>
+          </button>
+        )}
+
+        <button onClick={() => props.deleteFunction(props.product)}>
           <i className="fa-solid fa-trash"></i>
         </button>
       </div>

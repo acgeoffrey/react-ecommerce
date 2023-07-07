@@ -6,7 +6,14 @@ const Navbar = () => {
     <div className={styles.nav}>
       <div className={styles.leftNav}>
         <Link to={"/"}>
-          <h2>SHOP</h2>
+          <img
+            width="48"
+            height="48"
+            src="https://img.icons8.com/color/48/online-store.png"
+            alt="online-store"
+            style={{ marginRight: "0.8rem" }}
+          />
+          <h2>eCommerce</h2>
         </Link>
         <Link to={"/add-product"}>Add Product</Link>
       </div>

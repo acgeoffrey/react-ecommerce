@@ -1,8 +1,49 @@
 .container {
+  width: 100%;
   margin-top: 3rem;
+}
+
+.sortMenu {
+  width: 80%;
   margin-left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.sortMenu h3 {
+  color: grey;
+}
+
+.sortBtn {
+  font-size: 1rem;
+  background-color: white;
+  border: 2px solid rgba(128, 128, 128, 0.307);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.sortBtnActive {
+  font-size: 1rem;
+  background-color: #1c6758;
+  border: 2px solid #1c6758;
+  border-radius: 0.5rem;
+  color: white;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.sortBtn:hover {
+  border-color: #1c6758;
+}
+
+.productContainer {
+  margin-top: 2rem;
   width: 80%;
+  margin-left: 50%;
+  transform: translateX(-50%);
   height: 100vh;
   display: flex;
   flex-wrap: wrap;
@@ -24,7 +65,8 @@
 
 .productImage img {
   height: 10rem;
-  width: 7rem;
+  width: 10rem;
+  cursor: pointer;
 }
 
 .titleRating {
@@ -32,6 +74,10 @@
   flex-direction: column;
   align-items: center;
   gap: 0.3rem;
+}
+
+.titleRating h3 {
+  cursor: pointer;
 }
 
 .rating {
@@ -44,8 +90,14 @@
   font-size: 0.8rem;
 }
 
+.inputDescription {
+  height: 100%;
+  width: 100%;
+}
+
 .description {
   height: 15%;
+  width: 100%;
   font-size: 0.9rem;
   margin-bottom: 1rem;
   overflow: hidden;
@@ -73,6 +125,12 @@
   margin-bottom: 0.5rem;
   cursor: pointer;
   padding: 0 1rem;
+}
+
+.cartBtn:hover {
+  background-color: #1c6758;
+  border: none;
+  color: white;
 }
 
 .bottomButtons {

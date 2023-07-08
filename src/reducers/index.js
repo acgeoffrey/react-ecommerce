@@ -5,6 +5,8 @@ import {
   ADD_PRODUCT,
   ADD_TO_CART,
   REMOVE_FROM_CART,
+  INCREASE_CART_QTY,
+  DECREASE_CART_QTY,
 } from "../actions";
 
 const initialState = {
@@ -48,9 +50,36 @@ export function products(state = initialState, action) {
       };
 
     case ADD_TO_CART:
+      action.product.cart = 1;
       return {
         ...state,
         cart: [action.product, ...state.cart],
+      };
+
+    case INCREASE_CART_QTY:
+      const newArray = state.cart;
+      for (let i = 0; i < newArray.length; i++) {
+        if (newArray[i].id === action.product.id) {
+          newArray[i].cart += 1;
+        }
+      }
+      return {
+        ...state,
+        cart: newArray,
+      };
+
+    case DECREASE_CART_QTY:
+      const newDecArray = state.cart;
+      for (let i = 0; i < newDecArray.length; i++) {
+        if (newDecArray[i].id === action.product.id) {
+          if (newDecArray[i].cart > 0) {
+            newDecArray[i].cart -= 1;
+          }
+        }
+      }
+      return {
+        ...state,
+        cart: newDecArray,
       };
 
     case REMOVE_FROM_CART:

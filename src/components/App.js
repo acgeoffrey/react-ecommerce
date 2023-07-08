@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./Navbar";
 import Home from "../pages/Home";
@@ -11,15 +11,47 @@ const Page404 = () => {
 };
 
 const App = (props) => {
+  const [cartCount, setCartCount] = useState(0);
+
+  const cartCountFunc = () => {
+    const cart = props.store.getState().cart;
+    let tempCount = 0;
+    for (let i = 0; i < cart.length; i++) {
+      tempCount += cart[i].cart;
+    }
+    setCartCount(tempCount);
+  };
+
   return (
     <div className="container">
       <BrowserRouter>
-        <Navbar />
+        <Navbar cartCount={cartCount} />
         <Routes>
-          <Route path="/" element={<Home store={props.store} />} />
-          <Route path="/add-product" element={<AddProduct />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/product-details" element={<ProductDetails />} />
+          <Route
+            path="/"
+            element={
+              <Home store={props.store} cartCountFunction={cartCountFunc} />
+            }
+          />
+          <Route
+            path="/add-product"
+            element={<AddProduct store={props.store} />}
+          />
+          <Route
+            path="/cart"
+            element={
+              <Cart store={props.store} cartCountFunction={cartCountFunc} />
+            }
+          />
+          <Route
+            path="/product-details"
+            element={
+              <ProductDetails
+                store={props.store}
+                cartCountFunction={cartCountFunc}
+              />
+            }
+          />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/home.module.css";
 import { Rating } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Product = (props) => {
   const [edit, setEdit] = useState(false);
@@ -10,6 +11,7 @@ const Product = (props) => {
     rating: props.product.rating,
     price: props.product.price,
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (props.editing.isEdit && props.product === props.editing.product) {
@@ -17,10 +19,23 @@ const Product = (props) => {
     }
   }, [props.editing.isEdit, props.product, props.editing.product]);
 
+  const renderProductDetails = (product) => {
+    navigate("/product-details", {
+      state: {
+        product,
+        cartFunction: 2,
+      },
+    });
+  };
+
   return (
     <div className={styles.productDiv}>
       <div className={styles.productImage}>
-        <img src={props.product.thumbnail} alt="" />
+        <img
+          src={props.product.thumbnail}
+          alt=""
+          onClick={() => renderProductDetails(props.product)}
+        />
       </div>
       <div className={styles.titleRating}>
         {edit ? (
@@ -29,7 +44,9 @@ const Product = (props) => {
             onChange={(e) => setData({ ...data, title: e.target.value })}
           />
         ) : (
-          <h3>{props.product.title}</h3>
+          <h3 onClick={() => renderProductDetails(props.product)}>
+            {props.product.title}
+          </h3>
         )}
 
         <div className={styles.rating}>
@@ -73,12 +90,17 @@ const Product = (props) => {
             />
           ) : (
             <h3>
-              ₹ <span>{props.product.price}</span>
+              $ <span>{props.product.price}</span>
             </h3>
           )}
         </div>
         <div className={styles.buttons}>
-          <button className={styles.cartBtn}>Add to cart</button>
+          <button
+            className={styles.cartBtn}
+            onClick={() => props.cartFunction(props.product)}
+          >
+            Add to cart
+          </button>
         </div>
       </div>
       <div className={styles.bottomButtons}>

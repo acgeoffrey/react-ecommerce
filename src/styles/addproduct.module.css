@@ -1,0 +1,46 @@
+.container {
+  margin-top: 3rem;
+  width: 100%;
+}
+
+.formContainer {
+  width: 40%;
+  margin-left: 50%;
+  margin-bottom: 3rem;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(128, 128, 128, 0.189);
+  padding: 2rem;
+}
+
+.formContainer h3 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.formContainer h4 {
+  font-size: 1.1rem;
+}
+
+.formContainer input {
+  margin-bottom: 0.5rem;
+  height: 2rem;
+  width: 20rem;
+  padding: 1rem;
+}
+
+.addProductBtn {
+  margin-top: 1.5rem;
+  width: 15rem;
+  height: 3rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background-color: #17594a;
+  border: none;
+  color: white;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}

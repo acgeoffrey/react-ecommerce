@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 import Product from "../components/Product";
 import styles from "../styles/home.module.css";
-import { getProducts, updateProduct, deleteProduct } from "../actions";
+import {
+  getProducts,
+  updateProduct,
+  deleteProduct,
+  addToCart,
+} from "../actions";
 import toast from "react-hot-toast";
 
 const Home = (props) => {
   const store = props.store;
+  console.log("STATE", store.getState());
   const list = store.getState().list;
 
   const [editing, setEditing] = useState({
@@ -43,14 +49,43 @@ const Home = (props) => {
     }
   };
 
+  const addProductToCart = (product) => {
+    const cart = store.getState().cart;
+    let alreadyPresent = false;
+    cart.map((item) => {
+      if (product === item) {
+        toast.error("Product already in Cart!");
+        alreadyPresent = true;
+      }
+      return [];
+    });
+    // console.log(alreadyPresent);
+    if (!alreadyPresent) {
+      store.dispatch(addToCart(product));
+      props.cartCountFunction();
+      toast.success("Product added to Cart");
+    }
+  };
+
   useEffect(() => {
     store.subscribe(() => {
       setEditing({ product: {}, isEdit: false });
     });
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://dummyjson.com/products?limit=10");
+        if (response.status === 200) {
+          const json = await response.json();
+          store.dispatch(getProducts(json.products));
+        } else {
+          toast.error(`ERROR FETCHING FROM API: ${response.status}`);
+        }
+      } catch (error) {
+        toast.error(error);
+      }
+    };
     if (store.getState().list.length < 1) {
-      fetch("https://dummyjson.com/products?limit=10")
-        .then((res) => res.json())
-        .then((json) => store.dispatch(getProducts(json.products)));
+      fetchData();
     }
   }, [store]);
 
@@ -72,6 +107,7 @@ const Home = (props) => {
           <Product
             editFunction={editProduct}
             deleteFunction={deleteProductComponent}
+            cartFunction={addProductToCart}
             editing={editing}
             product={product}
             key={`product-${product.id}`}

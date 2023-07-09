@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Home from "../pages/Home";
 import Cart from "../pages/Cart";
@@ -24,7 +24,7 @@ const App = (props) => {
 
   return (
     <div className="container">
-      <BrowserRouter>
+      <BrowserRouter basename="/react-ecommerce">
         <Navbar cartCount={cartCount} />
         <Routes>
           <Route

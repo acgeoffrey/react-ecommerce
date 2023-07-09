@@ -2,7 +2,7 @@
   "name": "ecommerce-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://acgeoffrey.github.io/",
+  "homepage": "https://acgeoffrey.github.io/react-ecommerce",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -28,7 +28,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -b master -d build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

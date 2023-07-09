@@ -2,7 +2,7 @@
 
 - This is a simple Frontend for an E-Commerce website.
 
-##Functionalities
+## Functionalities
 
 - Navbar
   - Shows cart count

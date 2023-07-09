@@ -11,12 +11,21 @@ const AddProduct = (props) => {
   const [images, setImages] = useState([]);
   const [price, setPrice] = useState();
   const [rating, setRating] = useState();
+  const [stock, setStock] = useState();
   const store = props.store;
   const navigate = useNavigate();
 
   const addProductStore = () => {
     store.dispatch(
-      addProduct({ title, description, thumbnail, images, price, rating })
+      addProduct({
+        title,
+        description,
+        thumbnail,
+        images,
+        price,
+        rating,
+        stock,
+      })
     );
     navigate("/");
     toast.success("New Product Added");
@@ -44,6 +53,8 @@ const AddProduct = (props) => {
         />
         <h4>Image URL</h4>
         <input value={images} onChange={(e) => setImages([e.target.value])} />
+        <h4>Stock Available</h4>
+        <input value={stock} onChange={(e) => setStock(e.target.value)} />
         <button className={styles.addProductBtn} onClick={addProductStore}>
           Add Product
         </button>

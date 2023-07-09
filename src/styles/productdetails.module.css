@@ -1,5 +1,12 @@
 .container {
   width: 100%;
+  margin-top: 3rem;
+}
+
+.container a {
+  margin-left: 25%;
+  font-size: 1.2rem;
+  color: #17594a;
 }
 
 .productContainer {

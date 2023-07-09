@@ -32,7 +32,11 @@ const Product = (props) => {
     <div className={styles.productDiv}>
       <div className={styles.productImage}>
         <img
-          src={props.product.thumbnail}
+          src={
+            props.product.thumbnail
+              ? props.product.thumbnail
+              : "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"
+          }
           alt=""
           onClick={() => renderProductDetails(props.product)}
         />
